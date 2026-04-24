@@ -15,15 +15,18 @@ import {
 
 import EmojiPicker from "emoji-picker-react";
 
-export default function CreatePostModal({ onClose }) {
+type Props = {
+  onClose: () => void;
+};
+
+export default function CreatePostModal({ onClose }: Props) {
   const [text, setText] = useState("");
-  const [media, setMedia] = useState(null);
+ const [media, setMedia] = useState<File | null>(null);
 
   const [showEmoji, setShowEmoji] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [privacy, setPrivacy] = useState("public");
-
-  const privacyRef = useRef(null);
+const privacyRef = useRef<HTMLDivElement | null>(null);
 
   const privacyOptions = [
     { value: "public", icon: <FaGlobe />, label: "Public" },
@@ -149,9 +152,9 @@ export default function CreatePostModal({ onClose }) {
           {showEmoji && (
             <div className="absolute bottom-full mb-2 left-0 z-50 scale-90 origin-bottom-left shadow-lg rounded-xl overflow-hidden">
               <EmojiPicker
-                onEmojiClick={(emojiData) =>
-                  setText((prev) => prev + emojiData.emoji)
-                }
+onEmojiClick={(emojiData: any) =>
+  setText((prev) => prev + emojiData.emoji)
+}
                 searchDisabled
                 skinTonesDisabled
                 height={300}
@@ -180,7 +183,10 @@ export default function CreatePostModal({ onClose }) {
         type="file"
         hidden
         accept="image/*"
-        onChange={(e) => setMedia(e.target.files[0])}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (file) setMedia(file);
+}}
       />
 
       <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-[2px] rounded opacity-0 group-hover:opacity-100 transition">

@@ -4,7 +4,7 @@ import { FaThumbsUp, FaComment, FaShare } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import PeopleYouMayKnow from "../components/PeopleYouMayKnow";
 import Loader from "../components/Loader";
-
+import CreatePost from "../components/CreatePost";
 const stories = [
   { id: 1, name: "Ali", image: "https://i.pravatar.cc/150?img=1" },
   { id: 2, name: "John", image: "https://i.pravatar.cc/150?img=2" },
@@ -102,7 +102,7 @@ export default function Home() {
             ))}
 
           </div>
-
+<CreatePost />
           {/* ================= POSTS ================= */}
           <div className="space-y-6">
 

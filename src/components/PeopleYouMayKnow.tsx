@@ -1,5 +1,3 @@
-// src/components/PeopleYouMayKnow.tsx
-
 import { FiUserPlus, FiX, FiUsers } from "react-icons/fi";
 
 const suggestions = [
@@ -8,12 +6,28 @@ const suggestions = [
   { id: 3, name: "Hassan Ali", mutual: 8, image: "https://i.pravatar.cc/150?img=13" },
   { id: 4, name: "Ayesha Noor", mutual: 3, image: "https://i.pravatar.cc/150?img=14" },
   { id: 5, name: "Ali Ahmed", mutual: 6, image: "https://i.pravatar.cc/150?img=15" },
+
+  // 👉 NEW PEOPLE ADDED
+  { id: 6, name: "Usman Tariq", mutual: 4, image: "https://i.pravatar.cc/150?img=16" },
+  { id: 7, name: "Hina Shah", mutual: 1, image: "https://i.pravatar.cc/150?img=17" },
+  { id: 8, name: "Bilal Khan", mutual: 10, image: "https://i.pravatar.cc/150?img=18" },
+  { id: 9, name: "Zainab Ali", mutual: 7, image: "https://i.pravatar.cc/150?img=19" },
+  { id: 10, name: "Farhan Ahmed", mutual: 3, image: "https://i.pravatar.cc/150?img=20" },
 ];
 
 export default function PeopleYouMayKnow() {
+
+  // 👉 OPEN FULL PAGE
+  const handleSeeAll = () => {
+    window.open("/people", "_blank"); 
+  };
+
   return (
     <div className="w-full max-w-6xl mx-auto mt-10 px-4">
-
+ <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+        * { font-family: 'Poppins', sans-serif; }
+      `}</style>
       {/* HEADER */}
       <div className="flex items-center justify-between mb-4">
 
@@ -22,7 +36,10 @@ export default function PeopleYouMayKnow() {
           People You May Know
         </h2>
 
-        <button className="text-xs text-blue-600 hover:underline">
+        <button
+          onClick={handleSeeAll}
+          className="text-xs text-blue-600 hover:underline"
+        >
           See all
         </button>
 
@@ -31,7 +48,7 @@ export default function PeopleYouMayKnow() {
       {/* CARDS ROW */}
       <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
 
-        {suggestions.map((user) => (
+        {suggestions.slice(0, 5).map((user) => (
           <div
             key={user.id}
             className="min-w-[200px] bg-white border rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition relative"

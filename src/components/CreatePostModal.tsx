@@ -7,10 +7,12 @@ import {
   FaUserFriends,
   FaLock,
   FaTag,
+  FaMapMarkerAlt,
+  FaSmile,
   FaCaretDown,
+  FaSmileWink,
 } from "react-icons/fa";
 
-import { FiSmile } from "react-icons/fi";
 import EmojiPicker from "emoji-picker-react";
 
 export default function CreatePostModal({ onClose }) {
@@ -31,7 +33,6 @@ export default function CreatePostModal({ onClose }) {
 
   const current = privacyOptions.find((p) => p.value === privacy);
 
-  // OUTSIDE CLICK CLOSE PRIVACY
   useEffect(() => {
     const handleClick = (e) => {
       if (privacyRef.current && !privacyRef.current.contains(e.target)) {
@@ -43,7 +44,6 @@ export default function CreatePostModal({ onClose }) {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  // POST HANDLER
   const handlePost = async () => {
     if (!text && !media) return;
 
@@ -53,15 +53,11 @@ export default function CreatePostModal({ onClose }) {
     if (media) formData.append("media", media);
 
     try {
-      const res = await fetch("http://localhost:5000/api/posts", {
+      await fetch("http://localhost:5000/api/posts", {
         method: "POST",
         body: formData,
         credentials: "include",
       });
-
-      const data = await res.json();
-
-      console.log("Post created:", data);
 
       setText("");
       setMedia(null);
@@ -74,18 +70,17 @@ export default function CreatePostModal({ onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-
-      {/* MODAL CARD */}
+ <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+        * { font-family: 'Poppins', sans-serif; }
+      `}</style>
       <div className="w-[520px] bg-white rounded-2xl shadow-2xl overflow-hidden">
 
         {/* HEADER */}
         <div className="flex items-center justify-between px-5 py-3 border-b">
           <h2 className="font-semibold text-gray-800">Create Post</h2>
 
-          <button
-            onClick={onClose}
-            className="p-2 rounded-full hover:bg-gray-100"
-          >
+          <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100">
             <FaTimes />
           </button>
         </div>
@@ -95,26 +90,21 @@ export default function CreatePostModal({ onClose }) {
 
           <img
             src="/profile.png"
-            className="w-11 h-11 rounded-full object-cover"
+            className="w-11 h-11 rounded-full object-top object-cover"
           />
 
           <div className="relative" ref={privacyRef}>
-
             <p className="font-semibold text-sm">Syed Umair</p>
 
-            {/* PRIVACY BUTTON */}
             <button
               onClick={() => setShowPrivacy(!showPrivacy)}
               className="mt-1 flex items-center gap-1 text-xs bg-gray-100 px-2 py-1 rounded-full hover:bg-gray-200"
             >
               {current?.icon}
               {current?.label}
-              <FaCaretDown
-                className={`transition ${showPrivacy ? "rotate-180" : ""}`}
-              />
+              <FaCaretDown className={`transition ${showPrivacy ? "rotate-180" : ""}`} />
             </button>
 
-            {/* DROPDOWN */}
             {showPrivacy && (
               <div className="absolute top-14 left-0 bg-white border rounded-xl shadow-lg w-36 z-50">
 
@@ -134,7 +124,6 @@ export default function CreatePostModal({ onClose }) {
 
               </div>
             )}
-
           </div>
         </div>
 
@@ -152,15 +141,13 @@ export default function CreatePostModal({ onClose }) {
 
           <button
             onClick={() => setShowEmoji(!showEmoji)}
-            className="text-xl text-center hover:scale-110 transition"
-          > 
-            <FiSmile />
+            className="text-gray-600 hover:text-gray-800 transition"
+          >
+            <FaSmile className="text-xl" />
           </button>
 
-          {/* FIXED EMOJI POPUP */}
           {showEmoji && (
-            <div className="absolute bottom-full mb-2 left-0 z-50 shadow-lg rounded-xl overflow-hidden scale-90 origin-bottom-left">
-
+            <div className="absolute bottom-full mb-2 left-0 z-50 scale-90 origin-bottom-left shadow-lg rounded-xl overflow-hidden">
               <EmojiPicker
                 onEmojiClick={(emojiData) =>
                   setText((prev) => prev + emojiData.emoji)
@@ -170,43 +157,81 @@ export default function CreatePostModal({ onClose }) {
                 height={300}
                 width={280}
               />
-
             </div>
           )}
 
         </div>
 
-        {/* MEDIA */}
-        <div className="flex justify-between px-5 py-4 border-t">
+        {/* ACTION BAR (FIXED TOOLTIP STYLE) */}
+      <div className="flex items-center justify-between px-5 py-4 border-t text-gray-600">
 
-          <label className="group relative cursor-pointer">
-            <FaImage className="text-green-500 text-xl" />
-            <span className="tooltip">Photo</span>
-            <input
-              type="file"
-              hidden
-              accept="image/*"
-              onChange={(e) => setMedia(e.target.files[0])}
-            />
-          </label>
+  {/* LEFT HEADING */}
+  <div className="text-sm font-semibold text-gray-500">
+    Add to your post
+  </div>
 
-          <label className="group relative cursor-pointer">
-            <FaVideo className="text-red-500 text-xl" />
-            <span className="tooltip">Video</span>
-            <input
-              type="file"
-              hidden
-              accept="video/*"
-              onChange={(e) => setMedia(e.target.files[0])}
-            />
-          </label>
+  {/* RIGHT ICONS */}
+  <div className="flex items-center gap-3 text-lg">
 
-          <div className="group relative cursor-pointer">
-            <FaTag className="text-blue-500 text-xl" />
-            <span className="tooltip">Tag People</span>
-          </div>
+    {/* PHOTO */}
+    <label className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 cursor-pointer group relative">
+      <FaImage />
+      <input
+        type="file"
+        hidden
+        accept="image/*"
+        onChange={(e) => setMedia(e.target.files[0])}
+      />
 
-        </div>
+      <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-[2px] rounded opacity-0 group-hover:opacity-100 transition">
+        Photo
+      </span>
+    </label>
+
+    {/* VIDEO */}
+    <label className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 cursor-pointer group relative">
+      <FaVideo />
+      <input
+        type="file"
+        hidden
+        accept="video/*"
+        onChange={(e) => setMedia(e.target.files[0])}
+      />
+
+      <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-[2px] rounded opacity-0 group-hover:opacity-100 transition">
+        Video
+      </span>
+    </label>
+
+    {/* FEELING */}
+    <div className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 cursor-pointer group relative">
+      <FaSmileWink />
+
+      <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-[2px] rounded opacity-0 group-hover:opacity-100 transition">
+        Feeling
+      </span>
+    </div>
+
+    {/* CHECK IN */}
+    <div className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 cursor-pointer group relative">
+      <FaMapMarkerAlt />
+
+      <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-[2px] rounded opacity-0 group-hover:opacity-100 transition">
+       Location
+      </span>
+    </div>
+
+    {/* TAG */}
+    <div className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 cursor-pointer group relative">
+      <FaTag />
+
+      <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-[2px] rounded opacity-0 group-hover:opacity-100 transition">
+        Tag
+      </span>
+    </div>
+
+  </div>
+</div>
 
         {/* POST BUTTON */}
         <div className="p-4">
@@ -224,29 +249,6 @@ export default function CreatePostModal({ onClose }) {
         </div>
 
       </div>
-
-      {/* TOOLTIP */}
-      <style>{`
-        .tooltip {
-          position: absolute;
-          top: -28px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: black;
-          color: white;
-          font-size: 10px;
-          padding: 2px 6px;
-          border-radius: 4px;
-          opacity: 0;
-          transition: 0.2s;
-          white-space: nowrap;
-        }
-
-        .group:hover .tooltip {
-          opacity: 1;
-        }
-      `}</style>
-
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import Trending from "./components/Trending";
 import Featured from "./components/Feature";
 import Work from "./components/Work";
+import GenresSection from "./components/GenresSection";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 <Trending />
 <Featured />
 <Work />
+<GenresSection />
 
       <Routes>
         <Route path="/" element={<Home />} />

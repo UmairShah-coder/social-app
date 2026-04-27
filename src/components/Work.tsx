@@ -20,52 +20,70 @@ const steps = [
 
 const ExperienceSection = () => {
   return (
-    <section className="w-full bg-black text-white py-20">
+    <section className="w-full bg-black text-white py-24 relative overflow-hidden">
+ <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+        * { font-family: 'Poppins', sans-serif; }
+      `}</style>
+      {/* Background glow */}
+      <div className="absolute top-0 left-0 w-full h-full  pointer-events-none" />
 
       {/* HEADER */}
-      <div className="text-center mb-14">
-        <h2 className="text-3xl font-bold text-red-600">
+      <div className="text-center mb-16 relative z-10">
+        <h2 className="text-4xl font-bold text-red-600">
           How It Works
         </h2>
-        <p className="text-zinc-400 text-sm mt-2">
-          Simple steps to enjoy unlimited entertainment
+        <p className="text-zinc-400 text-sm mt-3">
+          Simple steps to unlock unlimited entertainment
         </p>
       </div>
 
-      {/* CARDS */}
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+      {/* STEPS */}
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
 
-        {steps.map((step, index) => {
-          const Icon = step.icon;
+        {/* LINE (desktop only) */}
+        <div className="hidden md:block absolute top-1/2 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
 
-          return (
-            <div
-              key={index}
-              className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 text-center
-              hover:scale-105 hover:border-red-600/40 transition duration-300 shadow-lg"
-            >
+        <div className="grid md:grid-cols-3 gap-10 relative">
 
-              {/* ICON */}
-              <div className="w-14 h-14 mx-auto flex items-center justify-center rounded-full bg-red-600/20 mb-5">
-                <Icon size={28} className="text-red-600" />
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+
+            return (
+              <div
+                key={index}
+                className="relative bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 rounded-2xl p-8 text-center
+                hover:-translate-y-2 hover:shadow-red-600/30 transition-all duration-300 shadow-lg"
+              >
+
+                {/* STEP NUMBER */}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-xs bg-red-600 px-3 py-1 rounded-full">
+                  {`0${index + 1}`}
+                </div>
+
+                {/* ICON */}
+                <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full 
+                bg-gradient-to-br from-red-600/30 to-red-600/10 mb-6">
+                  <Icon size={30} className="text-red-500" />
+                </div>
+
+                {/* TITLE */}
+                <h3 className="text-xl font-semibold">
+                  {step.title}
+                </h3>
+
+                {/* DESC */}
+                <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
+                  {step.desc}
+                </p>
+
               </div>
+            );
+          })}
 
-              {/* TITLE */}
-              <h3 className="text-lg font-semibold">
-                {step.title}
-              </h3>
-
-              {/* DESC */}
-              <p className="text-zinc-400 text-sm mt-2 leading-relaxed">
-                {step.desc}
-              </p>
-
-            </div>
-          );
-        })}
+        </div>
 
       </div>
-
     </section>
   );
 };

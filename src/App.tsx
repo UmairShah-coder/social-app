@@ -6,7 +6,7 @@ import Trending from "./components/Trending";
 import Featured from "./components/Feature";
 import Work from "./components/Work";
 import GenresSection from "./components/GenresSection";
-
+import CinematicSection from "./components/Cinematic";
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +15,7 @@ function App() {
 <Trending />
 <Featured />
 <Work />
+<CinematicSection />
 <GenresSection />
 
       <Routes>

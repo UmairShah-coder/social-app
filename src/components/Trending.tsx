@@ -103,7 +103,7 @@ const Trending = () => {
       <div className="max-w-7xl mx-auto px-6 mb-6 flex justify-between items-center">
 
         <div>
-          <h2 className="text-2xl font-bold text-red-500">
+          <h2 className="text-2xl font-bold text-red-600">
             Trending Movies
           </h2>
           <p className="text-zinc-500 text-sm">
@@ -111,15 +111,35 @@ const Trending = () => {
           </p>
         </div>
 
-        <select
-          onChange={(e) => handleCategoryChange(e.target.value)}
-          className="bg-zinc-800 text-white px-4 py-2 rounded"
-        >
-          <option value="all">All</option>
-          <option value="bollywood">Bollywood</option>
-          <option value="hollywood">Hollywood</option>
-          <option value="punjabi">Punjabi</option>
-        </select>
+      <div className="relative w-fit">
+  <select
+    onChange={(e) => handleCategoryChange(e.target.value)}
+    className="
+      w-56
+      bg-white/5 backdrop-blur-md
+      text-white px-5 py-3 pr-12
+      rounded-2xl
+      border border-white/10
+      shadow-[0_8px_30px_rgba(0,0,0,0.5)]
+      hover:border-purple-500/40
+      focus:outline-none focus:ring-2 focus:ring-purple-500/50
+      transition-all duration-300
+      appearance-none cursor-pointer
+    "
+  >
+    <option value="all" className="bg-zinc-900">All</option>
+    <option value="bollywood" className="bg-zinc-900">Bollywood</option>
+    <option value="hollywood" className="bg-zinc-900">Hollywood</option>
+    <option value="punjabi" className="bg-zinc-900">Punjabi</option>
+  </select>
+
+  {/* Premium Arrow */}
+  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+    <div className="w-6 h-6 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
+      <span className="text-xs text-white">▼</span>
+    </div>
+  </div>
+</div>
 
       </div>
 
@@ -157,7 +177,7 @@ const Trending = () => {
         <button
           onClick={loadMore}
           disabled={loading}
-          className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-semibold"
+          className="bg-red-600 hover:bg-red-700 transition-all px-6 py-2 rounded-full font-semibold"
         >
           {loading ? "Loading..." : "Load More"}
         </button>

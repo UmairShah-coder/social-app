@@ -1,6 +1,8 @@
-import { Search } from "lucide-react";
-
+import { Search, Lock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+    const navigate = useNavigate();
+
   return (
     <nav className="w-full bg-black border-b border-red-950/40">
  <style>{`
@@ -45,8 +47,17 @@ const Navbar = () => {
           />
 
         </div>
+  <button
+          onClick={() => navigate("/login")}
+          className="ml-3 w-10 h-10 flex items-center justify-center 
+          rounded-full bg-red-600 hover:bg-red-700 transition"
+        >
+          <Lock size={18} className="text-white" />
+        </button>
 
       </div>
+      
+
     </nav>
   );
 };

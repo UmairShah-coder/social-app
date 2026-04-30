@@ -11,7 +11,7 @@ import Work from "./components/Work";
 import GenresSection from "./components/GenresSection";
 import CinematicSection from "./components/Cinematic";
 import Loader from "./components/Loder";
-
+import Signup from "./components/Signup";
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -50,7 +50,7 @@ function App() {
 
         {/* 🔐 LOGIN PAGE */}
         <Route path="/login" element={<Login />} />
-
+<Route path="/signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );

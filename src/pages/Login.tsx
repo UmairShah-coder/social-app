@@ -21,10 +21,8 @@ const videoRef = useRef(null);
   autoPlay
   loop
   muted
-  playsInline
   onLoadedData={() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 1000; // 👈 slow speed (0.5 = half speed)
     }
   }}
   className="absolute w-full h-full object-cover"

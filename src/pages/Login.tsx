@@ -13,7 +13,7 @@ export default function LuxuryLogin() {
   };
 const videoRef = useRef(null);
   return (
-    <div className="h-screen w-full relative flex items-center justify-center  overflow-hidden">
+    <div className="h-screen w-full relative flex items-center justify-left  overflow-hidden">
 
       {/* 🎬 VIDEO BACKGROUND */}
       <video
@@ -27,7 +27,7 @@ const videoRef = useRef(null);
   }}
   className="absolute w-full h-full object-cover"
 >
-  <source src="/vioo.mp4" type="video/mp4" />
+  <source src="/loo.mp4" type="video/mp4" />
 </video>
 
       {/* FONT */}
@@ -49,7 +49,7 @@ const videoRef = useRef(null);
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
         className="relative   z-10 w-full max-w-md p-10 rounded-3xl
-       border border-white/10
+       border border-white/50
         shadow-[0_20px_80px_rgba(0,0,0,0.8)]"
       >
         {/* BRAND */}

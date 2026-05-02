@@ -14,7 +14,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="h-screen w-full relative flex items-center justify-center overflow-hidden">
+    <div className="h-screen w-full relative flex items-center justify-left overflow-hidden">
 <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
         * { font-family: 'Poppins', sans-serif; }
@@ -27,7 +27,7 @@ export default function Signup() {
         muted
         className="absolute w-full h-full object-cover"
       >
-        <source src="/vioo.mp4" type="video/mp4" />
+        <source src="/loo.mp4" type="video/mp4" />
       </video>
 
       {/* OVERLAY */}
@@ -43,7 +43,7 @@ export default function Signup() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
         className="relative z-10 w-full max-w-md p-10 rounded-3xl
-        border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.8)]"
+        border border-white/50 shadow-[0_20px_80px_rgba(0,0,0,0.8)]"
       >
         {/* BRAND */}
         <div className="text-center mb-8 flex flex-col items-center gap-2">
